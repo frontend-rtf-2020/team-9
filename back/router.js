@@ -9,9 +9,9 @@ const jsonParser = express.json();
 
 var uristring = 
   process.env.MONGODB_URI || 
-  'mongodb://<dbuser>:<dbpassword>@ds135335.mlab.com:35335/heroku_4pb3bb8l';
+  'mongodb://admin123:admin123@ds135335.mlab.com:35335/heroku_4pb3bb8l';
 
-mongoose.connect(uristring, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, res) {
+mongoose.connect(uristring, { useNewUrlParser: true }, function (err, res) {
 	if (err) { 
 	  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
 	} else {
