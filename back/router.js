@@ -7,6 +7,19 @@ const Schema = mongoose.Schema;
 const app = express();
 const jsonParser = express.json();
 
+var uristring = 
+  process.env.MONGODB_URI || 
+  'mongodb://localhost/HelloMongoose';
+var theport = process.env.PORT || 5000;
+
+mongoose.connect(uristring, function (err, res) {
+	if (err) { 
+	  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+	} else {
+	  console.log ('Succeeded connected to: ' + uristring);
+	}
+  });
+
 const userScheme = new Schema({
     login: String,
 	email: String,
@@ -15,7 +28,7 @@ const userScheme = new Schema({
 
 const User = mongoose.model("User", userScheme);
 
-mongoose.connect("mongodb://localhost:27017/usersdb", { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect("mongodb://localhost:27017/usersdb", { useNewUrlParser: true, useUnifiedTopology: true });
 
 function controlCheckInput(login, email, callback) {
 	User.findOne({login: login}).exec((err, doc) => {
