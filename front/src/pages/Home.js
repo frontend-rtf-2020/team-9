@@ -6,15 +6,20 @@ class Home extends Component {
   render() {
     return (
     <div className="App">
-      <h1>Project Home</h1>
-      {/* Link to List.js */}
-      <Link to={'./list'}>
+      <h1>Доска задач</h1>
+      <Link to={'./auth'}>
         <button variant="raised">
-            Список команды
+            Авторизация
+        </button>
+      </Link>
+      <Link to={'./reg'}>
+        <button variant="raised">
+            Регистрация
         </button>
       </Link>
     </div>
     );
   }
 }
+
 export default Home;
