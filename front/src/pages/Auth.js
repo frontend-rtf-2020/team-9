@@ -49,12 +49,12 @@ class Auth extends React.Component {
     return (
       <div>
         <h2>Авторизация</h2><br/>
-        <label>Почта</label><br/>
+        <label>Почта</label><br/> <br></br>
         <input type="text" value={this.state.email} onChange={this.handleEmail} /><br/><br/>
-        <label>Пароль</label><br/>
-        <input type="text" value={this.state.password} onChange={this.handlePassword} /><br/>
+        <label>Пароль</label><br/> <br></br>
+        <input type="password" value={this.state.password} onChange={this.handlePassword} /><br/>
         <label>{this.state.message}</label><br/>
-        <button onClick={this.handleClick}>Войти</button>
+        <button onClick={this.handleClick}> Войти </button>
       </div>
     );
   }
