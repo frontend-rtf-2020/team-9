@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
 class Home extends Component {
   render() {
     return (
     <div className="App">
       <h1>Доска задач</h1>
       <Link to={'./auth'}>
-        <button variant="raised">
+        <button variant="raised" >
             Авторизация
         </button>
       </Link>
@@ -17,6 +16,7 @@ class Home extends Component {
             Регистрация
         </button>
       </Link>
+      
     </div>
     );
   }
