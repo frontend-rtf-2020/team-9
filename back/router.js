@@ -10,7 +10,6 @@ const jsonParser = express.json();
 var uristring = 
   process.env.MONGODB_URI || 
   'mongodb://localhost/HelloMongoose';
-var theport = process.env.PORT || 5000;
 
 mongoose.connect(uristring, function (err, res) {
 	if (err) { 
@@ -26,9 +25,14 @@ const userScheme = new Schema({
 	password: String
 }, {versionKey: false});
 
-const User = mongoose.model("User", userScheme);
+const boardScheme = new Schema({ 
+    userName: String,
+	name: String,
+	tasks: Array
+}, {versionKey: false});
 
-//mongoose.connect("mongodb://localhost:27017/usersdb", { useNewUrlParser: true, useUnifiedTopology: true });
+const User = mongoose.model("User", userScheme);
+const Boards = mongoose.model("Boards", boardScheme);
 
 function controlCheckInput(login, email, callback) {
 	User.findOne({login: login}).exec((err, doc) => {
@@ -47,6 +51,25 @@ function controlCheckInput(login, email, callback) {
 		}
 	})
 }
+
+router.post('/api/getBoards', jsonParser, async (req,res) => {
+	//Boards.deleteMany({}, function(err, docs){});
+	Boards.find({userName: req.body.userName}, function(err, docs){
+		if(err) return console.log(err);
+		console.log(req.body.userName);
+		res.json(docs); 
+	});
+	
+});
+
+router.post('/api/home', jsonParser, (req,res) => {
+	let board = new Boards({userName: req.body.userName, name: req.body.name, tasks: req.body.tasks});
+	board.save(function(err) {});
+	Boards.find({}, function(err, docs){
+		if(err) return console.log(err);
+		console.log(docs);
+	});
+});
 
 router.get('/api/getList', (req,res) => {
 	var list = ["1. Кузнецов Максим (капитан)", "2. Огаров Дмитрий", "3. Пенягин Святослав", "4.Голубев Алексей", "5.Дмитрий Кувашов"];
@@ -70,18 +93,23 @@ router.post('/api/register', jsonParser, async (req,res) => {
 });
 
 router.post('/api/auth', jsonParser, async (req,res) => {
-	User.findOne({email: req.body.email}, function(err, user){ 
+	User.findOne({login: req.body.login}, function(err, user){ 
 		if(err) return console.log(err);
 		console.log(user);
 		if (user != null)
 			if (user.password == req.body.password)
+			{
 				res.json("Вы успешно авторизовались");
+			}
 			else 
 				res.json("Такой пользователь не найден");
 		else
 			res.json("Такой пользователь не найден"); 
     });
 });
+
+
+
 
 process.on("SIGINT", () => {
 	mongoose.disconnect();
