@@ -32,6 +32,8 @@ class Reg extends React.Component {
       this.setState({message: 'Введите логин!'});
     else if (this.state.email.length == 0)
       this.setState({message: 'Введите адрес электронной почты!'});
+    else if (this.state.email.indexOf('@') && this.state.email.indexOf('.') === -1)
+      this.setState({message: 'Некорректный адрес электронной почты!'});
     else if (this.state.password.length == 0)
       this.setState({message: 'Введите пароль!'});
     else 
@@ -65,7 +67,11 @@ class Reg extends React.Component {
         <label>Пароль</label><br/>
         <input type="text" value={this.state.password} onChange={this.handlePassword} /><br/>
         <label>{this.state.message}</label><br/>
+        <Link to='/'> 
+            <button onClick={this.getUser} > Назад</button>
+        </Link>
         <button onClick={this.handleClick}>Отправить</button>
+        
       </div>
     );
   }
