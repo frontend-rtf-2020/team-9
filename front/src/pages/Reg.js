@@ -58,12 +58,12 @@ class Reg extends React.Component {
     return (
       <div>
         <h2>Регистрация</h2><br/>
-        <label>Логин</label><br/>
+        <label>Логин</label><br/> <br></br>
         <input type="text" value={this.state.login} onChange={this.handleLogin} /><br/><br/>
-        <label>Почта</label><br/>
+        <label>Почта</label><br/> <br></br>
         <input type="text" value={this.state.email} onChange={this.handleEmail} /><br/><br/>
-        <label>Пароль</label><br/>
-        <input type="text" value={this.state.password} onChange={this.handlePassword} /><br/>
+        <label>Пароль</label><br/> <br></br>
+        <input type="password" value={this.state.password} onChange={this.handlePassword} /><br/>
         <label>{this.state.message}</label><br/>
         <button onClick={this.handleClick}>Отправить</button>
       </div>
