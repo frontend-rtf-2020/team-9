@@ -27,9 +27,9 @@ class Auth extends React.Component {
   }
 
   handleClick() {
-    if (this.state.login.length == 0)
+    if (this.state.login.length === 0)
       this.setState({message: 'Введите логин!'});
-    else if (this.state.password.length == 0)
+    else if (this.state.password.length === 0)
       this.setState({message: 'Введите пароль!'});
     else 
       fetch('/api/auth', {
@@ -44,7 +44,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    if (this.state.message == "Вы успешно авторизовались")
+    if (this.state.message === "Вы успешно авторизовались")
       return (
         <div>
           <h2>{this.state.message}</h2><br/> 

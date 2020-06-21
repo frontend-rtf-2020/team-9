@@ -28,9 +28,9 @@ class Reg extends React.Component {
   }
 
   handleClick() {
-    if (this.state.login.length == 0)
+    if (this.state.login.length === 0)
       this.setState({message: 'Введите логин!'});
-    else if (this.state.email.length == 0)
+    else if (this.state.email.length === 0)
       this.setState({message: 'Введите адрес электронной почты!'});
     else if (this.state.email.indexOf('@') && this.state.email.indexOf('.') === -1)
       this.setState({message: 'Некорректный адрес электронной почты!'});
@@ -50,7 +50,7 @@ class Reg extends React.Component {
   }
 
   render() {
-    if (this.state.message == "Вы успешно зарегистрированы")
+    if (this.state.message === "Вы успешно зарегистрированы")
       return (
         <div>
           <label>{this.state.message}</label><br/> 
@@ -65,7 +65,7 @@ class Reg extends React.Component {
         <label>Почта</label><br/>
         <input type="text" value={this.state.email} onChange={this.handleEmail} /><br/><br/>
         <label>Пароль</label><br/>
-        <input type="text" value={this.state.password} onChange={this.handlePassword} /><br/>
+        <input type="password" value={this.state.password} onChange={this.handlePassword} /><br/>
         <label>{this.state.message}</label><br/>
         <Link to='/'> 
             <button onClick={this.getUser} > Назад</button>
