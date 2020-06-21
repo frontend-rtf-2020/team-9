@@ -61,7 +61,7 @@ class Auth extends React.Component {
         <label>Пароль</label><br/>
         <input type="password" value={this.state.password} onChange={this.handlePassword} /><br/>
         <label>{this.state.message}</label><br/>
-        <button onClick={this.handleClick}>Войти</button>
+        <button onClick={this.handleClick}> Войти </button>
       </div>
     );
   }
