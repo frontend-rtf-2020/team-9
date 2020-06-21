@@ -152,7 +152,7 @@ class Board extends Component {
           <button>Редактировать</button>
           <ul>
             {this.props.tasks.map(function(item) {
-              return <li> {item} </li>
+              return <ol> <li> {item} </li> </ol>
             })
             }
           </ul>
