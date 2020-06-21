@@ -47,7 +47,7 @@ class Auth extends React.Component {
     if (this.state.message === "Вы успешно авторизовались")
       return (
         <div>
-          <label>{this.state.message}</label><br/> 
+          <h2>{this.state.message}</h2><br/> 
           <Link to='/home'> 
             <button onClick={this.getUser} > На главную</button>
           </Link>
@@ -61,7 +61,10 @@ class Auth extends React.Component {
         <label>Пароль</label><br/>
         <input type="password" value={this.state.password} onChange={this.handlePassword} /><br/>
         <label>{this.state.message}</label><br/>
-        <button onClick={this.handleClick}>Войти</button>
+        <Link to='/'> 
+            <button onClick={this.getUser} > Назад</button>
+        </Link>
+        <button onClick={this.handleClick}> Войти </button>
       </div>
     );
   }

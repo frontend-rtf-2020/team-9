@@ -1,10 +1,7 @@
 var express = require('express');
-//var app = require('./app.js');
-const bodyParser = require("body-parser");
 var router = express.Router();
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const app = express();
 const jsonParser = express.json();
 
 var uristring = 
@@ -54,28 +51,23 @@ function controlCheckInput(login, email, callback) {
 }
 
 router.post('/api/getBoards', jsonParser, async (req,res) => {
-	//Boards.deleteMany({}, function(err, docs){});
 	Boards.find({userName: req.body.userName}, function(err, docs){
 		if(err) return console.log(err);
-		console.log(req.body.userName);
 		res.json(docs); 
 	});
 	
 });
 
-router.post('/api/home', jsonParser, (req,res) => {
-	let board = new Boards({userName: req.body.userName, name: req.body.name, tasks: req.body.tasks});
-	board.save(function(err) {});
-	Boards.find({}, function(err, docs){
+router.post('/api/deleteBoard', jsonParser, async (req,res) => {
+	Boards.deleteOne({_id: req.body._id}, function(err){
 		if(err) return console.log(err);
-		console.log(docs);
+		console.log("Доска удалена");
 	});
 });
 
-router.get('/api/getList', (req,res) => {
-	var list = ["1. Кузнецов Максим (капитан)", "2. Огаров Дмитрий", "3. Пенягин Святослав", "4.Голубев Алексей", "5.Дмитрий Кувашов"];
-	res.json(list);
-	console.log('Sent list of items');
+router.post('/api/home', jsonParser, (req,res) => {
+	let board = new Boards({userName: req.body.userName, name: req.body.name, tasks: req.body.tasks});
+	board.save(function(err) {});
 });
 
 router.post('/api/register', jsonParser, async (req,res) => {
@@ -109,8 +101,13 @@ router.post('/api/auth', jsonParser, async (req,res) => {
     });
 });
 
-
-
+router.post('/api/changeBoard', jsonParser, async (req,res) => {
+	Boards.deleteOne({userName: req.body.userName}, function(err){ 
+		if(err) return console.log(err);
+	});
+	let board = new Boards({userName: req.body.userName, name: req.body.name, tasks: req.body.tasks});
+	board.save(function(err) {});
+});
 
 process.on("SIGINT", () => {
 	mongoose.disconnect();
